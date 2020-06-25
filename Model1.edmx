@@ -1,0 +1,606 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище STU_PROJECTModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id_Company" />
+          </Key>
+          <Property Name="Id_Company" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Depatrment" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="Id_Treaty" />
+          </Key>
+          <Property Name="Id_Treaty" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Company" Type="int" Nullable="false" />
+          <Property Name="Id_Customers" Type="int" />
+          <Property Name="Id_Services" Type="int" Nullable="false" />
+          <Property Name="Id_Department" Type="int" Nullable="false" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="_End" Type="datetime" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Id_CustomersYR_L" Type="int" />
+        </EntityType>
+        <EntityType Name="Customers_F_L">
+          <Key>
+            <PropertyRef Name="Id_Customers" />
+          </Key>
+          <Property Name="Id_Customers" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Patronumic" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers_YR_L">
+          <Key>
+            <PropertyRef Name="Id_Customer" />
+          </Key>
+          <Property Name="Id_Customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Company" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="maill" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Developers">
+          <Key>
+            <PropertyRef Name="Id_Developers" />
+          </Key>
+          <Property Name="Id_Developers" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Patronumic" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id_Depatment" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Information_Depatment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id_Employee" Type="int" Nullable="false" />
+          <Property Name="Id_Contract" Type="int" Nullable="false" />
+          <Property Name="Work_Process" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Price_Services">
+          <Key>
+            <PropertyRef Name="Id_Services" />
+          </Key>
+          <Property Name="Id_Services" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Department" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tehnical_Depatment">
+          <Key>
+            <PropertyRef Name="Id_Department" />
+          </Key>
+          <Property Name="Id_Empioyee" Type="int" Nullable="false" />
+          <Property Name="Id_Contract" Type="int" Nullable="false" />
+          <Property Name="Work_Process" Type="int" Nullable="false" />
+          <Property Name="Id_Department" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Contract_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id_Company" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="Id_Company" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Customers_F_L">
+          <End Role="Customers_F_L" Type="Self.Customers_F_L" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers_F_L">
+              <PropertyRef Name="Id_Customers" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="Id_Customers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Customers_YR_L1">
+          <End Role="Customers_YR_L" Type="Self.Customers_YR_L" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers_YR_L">
+              <PropertyRef Name="Id_Customer" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="Id_CustomersYR_L" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Price_Services">
+          <End Role="Price_Services" Type="Self.Price_Services" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Price_Services">
+              <PropertyRef Name="Id_Services" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="Id_Services" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Information_Depatment_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Information_Depatment" Type="Self.Information_Depatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id_Treaty" />
+            </Principal>
+            <Dependent Role="Information_Depatment">
+              <PropertyRef Name="Id_Contract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Information_Depatment_Developers">
+          <End Role="Developers" Type="Self.Developers" Multiplicity="1" />
+          <End Role="Information_Depatment" Type="Self.Information_Depatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Developers">
+              <PropertyRef Name="Id_Developers" />
+            </Principal>
+            <Dependent Role="Information_Depatment">
+              <PropertyRef Name="Id_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tehnical_Depatment_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Tehnical_Depatment" Type="Self.Tehnical_Depatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id_Treaty" />
+            </Principal>
+            <Dependent Role="Tehnical_Depatment">
+              <PropertyRef Name="Id_Contract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tehnical_Depatment_Developers1">
+          <End Role="Developers" Type="Self.Developers" Multiplicity="1" />
+          <End Role="Tehnical_Depatment" Type="Self.Tehnical_Depatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Developers">
+              <PropertyRef Name="Id_Developers" />
+            </Principal>
+            <Dependent Role="Tehnical_Depatment">
+              <PropertyRef Name="Id_Empioyee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище STU_PROJECTModelContainer">
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers_F_L" EntityType="Self.Customers_F_L" Schema="dbo" Table="Customers_F.L" store:Type="Tables" />
+          <EntitySet Name="Customers_YR_L" EntityType="Self.Customers_YR_L" Schema="dbo" Table="Customers_YR.L" store:Type="Tables" />
+          <EntitySet Name="Developers" EntityType="Self.Developers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Information_Depatment" EntityType="Self.Information_Depatment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Price_Services" EntityType="Self.Price_Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tehnical_Depatment" EntityType="Self.Tehnical_Depatment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Contract_Company" Association="Self.FK_Contract_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Customers_F_L" Association="Self.FK_Contract_Customers_F_L">
+            <End Role="Customers_F_L" EntitySet="Customers_F_L" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Customers_YR_L1" Association="Self.FK_Contract_Customers_YR_L1">
+            <End Role="Customers_YR_L" EntitySet="Customers_YR_L" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Price_Services" Association="Self.FK_Contract_Price_Services">
+            <End Role="Price_Services" EntitySet="Price_Services" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Information_Depatment_Contract" Association="Self.FK_Information_Depatment_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Information_Depatment" EntitySet="Information_Depatment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Information_Depatment_Developers" Association="Self.FK_Information_Depatment_Developers">
+            <End Role="Developers" EntitySet="Developers" />
+            <End Role="Information_Depatment" EntitySet="Information_Depatment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tehnical_Depatment_Contract" Association="Self.FK_Tehnical_Depatment_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Tehnical_Depatment" EntitySet="Tehnical_Depatment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tehnical_Depatment_Developers1" Association="Self.FK_Tehnical_Depatment_Developers1">
+            <End Role="Developers" EntitySet="Developers" />
+            <End Role="Tehnical_Depatment" EntitySet="Tehnical_Depatment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="STU_PROJECTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id_Company" />
+          </Key>
+          <Property Name="Id_Company" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Depatrment" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_Company" FromRole="Company" ToRole="Contract" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="Id_Treaty" />
+          </Key>
+          <Property Name="Id_Treaty" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Company" Type="Int32" Nullable="false" />
+          <Property Name="Id_Customers" Type="Int32" />
+          <Property Name="Id_Services" Type="Int32" Nullable="false" />
+          <Property Name="Id_Department" Type="Int32" Nullable="false" />
+          <Property Name="Start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="C_End" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Id_CustomersYR_L" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Contract_Company" FromRole="Contract" ToRole="Company" />
+          <NavigationProperty Name="Customers_F_L" Relationship="Self.FK_Contract_Customers_F_L" FromRole="Contract" ToRole="Customers_F_L" />
+          <NavigationProperty Name="Customers_YR_L" Relationship="Self.FK_Contract_Customers_YR_L1" FromRole="Contract" ToRole="Customers_YR_L" />
+          <NavigationProperty Name="Price_Services" Relationship="Self.FK_Contract_Price_Services" FromRole="Contract" ToRole="Price_Services" />
+          <NavigationProperty Name="Information_Depatment" Relationship="Self.FK_Information_Depatment_Contract" FromRole="Contract" ToRole="Information_Depatment" />
+          <NavigationProperty Name="Tehnical_Depatment" Relationship="Self.FK_Tehnical_Depatment_Contract" FromRole="Contract" ToRole="Tehnical_Depatment" />
+        </EntityType>
+        <EntityType Name="Customers_F_L">
+          <Key>
+            <PropertyRef Name="Id_Customers" />
+          </Key>
+          <Property Name="Id_Customers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronumic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_Customers_F_L" FromRole="Customers_F_L" ToRole="Contract" />
+        </EntityType>
+        <EntityType Name="Customers_YR_L">
+          <Key>
+            <PropertyRef Name="Id_Customer" />
+          </Key>
+          <Property Name="Id_Customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="maill" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_Customers_YR_L1" FromRole="Customers_YR_L" ToRole="Contract" />
+        </EntityType>
+        <EntityType Name="Developers">
+          <Key>
+            <PropertyRef Name="Id_Developers" />
+          </Key>
+          <Property Name="Id_Developers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronumic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_Depatment" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Information_Depatment" Relationship="Self.FK_Information_Depatment_Developers" FromRole="Developers" ToRole="Information_Depatment" />
+          <NavigationProperty Name="Tehnical_Depatment" Relationship="Self.FK_Tehnical_Depatment_Developers1" FromRole="Developers" ToRole="Tehnical_Depatment" />
+        </EntityType>
+        <EntityType Name="Information_Depatment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id_Employee" Type="Int32" Nullable="false" />
+          <Property Name="Id_Contract" Type="Int32" Nullable="false" />
+          <Property Name="Work_Process" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Information_Depatment_Contract" FromRole="Information_Depatment" ToRole="Contract" />
+          <NavigationProperty Name="Developers" Relationship="Self.FK_Information_Depatment_Developers" FromRole="Information_Depatment" ToRole="Developers" />
+        </EntityType>
+        <EntityType Name="Price_Services">
+          <Key>
+            <PropertyRef Name="Id_Services" />
+          </Key>
+          <Property Name="Id_Services" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Department" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_Price_Services" FromRole="Price_Services" ToRole="Contract" />
+        </EntityType>
+        <EntityType Name="Tehnical_Depatment">
+          <Key>
+            <PropertyRef Name="Id_Department" />
+          </Key>
+          <Property Name="Id_Empioyee" Type="Int32" Nullable="false" />
+          <Property Name="Id_Contract" Type="Int32" Nullable="false" />
+          <Property Name="Work_Process" Type="Int32" Nullable="false" />
+          <Property Name="Id_Department" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Tehnical_Depatment_Contract" FromRole="Tehnical_Depatment" ToRole="Contract" />
+          <NavigationProperty Name="Developers" Relationship="Self.FK_Tehnical_Depatment_Developers1" FromRole="Tehnical_Depatment" ToRole="Developers" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Contract_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id_Company" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="Id_Company" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Customers_F_L">
+          <End Role="Customers_F_L" Type="Self.Customers_F_L" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers_F_L">
+              <PropertyRef Name="Id_Customers" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="Id_Customers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Customers_YR_L1">
+          <End Role="Customers_YR_L" Type="Self.Customers_YR_L" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers_YR_L">
+              <PropertyRef Name="Id_Customer" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="Id_CustomersYR_L" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Price_Services">
+          <End Role="Price_Services" Type="Self.Price_Services" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Price_Services">
+              <PropertyRef Name="Id_Services" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="Id_Services" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Information_Depatment_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Information_Depatment" Type="Self.Information_Depatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id_Treaty" />
+            </Principal>
+            <Dependent Role="Information_Depatment">
+              <PropertyRef Name="Id_Contract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tehnical_Depatment_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Tehnical_Depatment" Type="Self.Tehnical_Depatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id_Treaty" />
+            </Principal>
+            <Dependent Role="Tehnical_Depatment">
+              <PropertyRef Name="Id_Contract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Information_Depatment_Developers">
+          <End Role="Developers" Type="Self.Developers" Multiplicity="1" />
+          <End Role="Information_Depatment" Type="Self.Information_Depatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Developers">
+              <PropertyRef Name="Id_Developers" />
+            </Principal>
+            <Dependent Role="Information_Depatment">
+              <PropertyRef Name="Id_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tehnical_Depatment_Developers1">
+          <End Role="Developers" Type="Self.Developers" Multiplicity="1" />
+          <End Role="Tehnical_Depatment" Type="Self.Tehnical_Depatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Developers">
+              <PropertyRef Name="Id_Developers" />
+            </Principal>
+            <Dependent Role="Tehnical_Depatment">
+              <PropertyRef Name="Id_Empioyee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="STU_PROJECTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Company" EntityType="Self.Company" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" />
+          <EntitySet Name="Customers_F_L" EntityType="Self.Customers_F_L" />
+          <EntitySet Name="Customers_YR_L" EntityType="Self.Customers_YR_L" />
+          <EntitySet Name="Developers" EntityType="Self.Developers" />
+          <EntitySet Name="Information_Depatment" EntityType="Self.Information_Depatment" />
+          <EntitySet Name="Price_Services" EntityType="Self.Price_Services" />
+          <EntitySet Name="Tehnical_Depatment" EntityType="Self.Tehnical_Depatment" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Contract_Company" Association="Self.FK_Contract_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Customers_F_L" Association="Self.FK_Contract_Customers_F_L">
+            <End Role="Customers_F_L" EntitySet="Customers_F_L" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Customers_YR_L1" Association="Self.FK_Contract_Customers_YR_L1">
+            <End Role="Customers_YR_L" EntitySet="Customers_YR_L" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Price_Services" Association="Self.FK_Contract_Price_Services">
+            <End Role="Price_Services" EntitySet="Price_Services" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Information_Depatment_Contract" Association="Self.FK_Information_Depatment_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Information_Depatment" EntitySet="Information_Depatment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tehnical_Depatment_Contract" Association="Self.FK_Tehnical_Depatment_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Tehnical_Depatment" EntitySet="Tehnical_Depatment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Information_Depatment_Developers" Association="Self.FK_Information_Depatment_Developers">
+            <End Role="Developers" EntitySet="Developers" />
+            <End Role="Information_Depatment" EntitySet="Information_Depatment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tehnical_Depatment_Developers1" Association="Self.FK_Tehnical_Depatment_Developers1">
+            <End Role="Developers" EntitySet="Developers" />
+            <End Role="Tehnical_Depatment" EntitySet="Tehnical_Depatment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище STU_PROJECTModelContainer" CdmEntityContainer="STU_PROJECTEntities">
+          <EntitySetMapping Name="Company">
+            <EntityTypeMapping TypeName="STU_PROJECTModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Id_Company" ColumnName="Id_Company" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Depatrment" ColumnName="Depatrment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contract">
+            <EntityTypeMapping TypeName="STU_PROJECTModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="Id_Treaty" ColumnName="Id_Treaty" />
+                <ScalarProperty Name="Id_Company" ColumnName="Id_Company" />
+                <ScalarProperty Name="Id_Customers" ColumnName="Id_Customers" />
+                <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+                <ScalarProperty Name="Id_Department" ColumnName="Id_Department" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="C_End" ColumnName="_End" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id_CustomersYR_L" ColumnName="Id_CustomersYR_L" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers_F_L">
+            <EntityTypeMapping TypeName="STU_PROJECTModel.Customers_F_L">
+              <MappingFragment StoreEntitySet="Customers_F_L">
+                <ScalarProperty Name="Id_Customers" ColumnName="Id_Customers" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronumic" ColumnName="Patronumic" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers_YR_L">
+            <EntityTypeMapping TypeName="STU_PROJECTModel.Customers_YR_L">
+              <MappingFragment StoreEntitySet="Customers_YR_L">
+                <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
+                <ScalarProperty Name="Name_Company" ColumnName="Name_Company" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="maill" ColumnName="maill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Developers">
+            <EntityTypeMapping TypeName="STU_PROJECTModel.Developers">
+              <MappingFragment StoreEntitySet="Developers">
+                <ScalarProperty Name="Id_Developers" ColumnName="Id_Developers" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronumic" ColumnName="Patronumic" />
+                <ScalarProperty Name="Id_Depatment" ColumnName="Id_Depatment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Information_Depatment">
+            <EntityTypeMapping TypeName="STU_PROJECTModel.Information_Depatment">
+              <MappingFragment StoreEntitySet="Information_Depatment">
+                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+                <ScalarProperty Name="Id_Contract" ColumnName="Id_Contract" />
+                <ScalarProperty Name="Work_Process" ColumnName="Work_Process" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Price_Services">
+            <EntityTypeMapping TypeName="STU_PROJECTModel.Price_Services">
+              <MappingFragment StoreEntitySet="Price_Services">
+                <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+                <ScalarProperty Name="Id_Department" ColumnName="Id_Department" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tehnical_Depatment">
+            <EntityTypeMapping TypeName="STU_PROJECTModel.Tehnical_Depatment">
+              <MappingFragment StoreEntitySet="Tehnical_Depatment">
+                <ScalarProperty Name="Id_Empioyee" ColumnName="Id_Empioyee" />
+                <ScalarProperty Name="Id_Contract" ColumnName="Id_Contract" />
+                <ScalarProperty Name="Work_Process" ColumnName="Work_Process" />
+                <ScalarProperty Name="Id_Department" ColumnName="Id_Department" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="STU_PROJECTModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

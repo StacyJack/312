@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8b2456c894384bf3b48b6667f4e91d06" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="STU_PROJECTModel.Company" Width="1.5" PointX="0.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="STU_PROJECTModel.Contract" Width="1.5" PointX="2.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="STU_PROJECTModel.Customers_F_L" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="STU_PROJECTModel.Customers_YR_L" Width="1.5" PointX="5.875" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="STU_PROJECTModel.Developers" Width="1.5" PointX="7.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="STU_PROJECTModel.Information_Depatment" Width="1.5" PointX="6.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="STU_PROJECTModel.Price_Services" Width="1.5" PointX="0.625" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="STU_PROJECTModel.Tehnical_Depatment" Width="1.5" PointX="5.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="STU_PROJECTModel.Users" Width="1.5" PointX="9.875" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="STU_PROJECTModel.FK_Contract_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="STU_PROJECTModel.FK_Contract_Customers_F_L" ManuallyRouted="false" />
+        <AssociationConnector Association="STU_PROJECTModel.FK_Contract_Customers_YR_L1" ManuallyRouted="false" />
+        <AssociationConnector Association="STU_PROJECTModel.FK_Contract_Price_Services" ManuallyRouted="false" />
+        <AssociationConnector Association="STU_PROJECTModel.FK_Information_Depatment_Contract" ManuallyRouted="false" />
+        <AssociationConnector Association="STU_PROJECTModel.FK_Tehnical_Depatment_Contract" ManuallyRouted="false" />
+        <AssociationConnector Association="STU_PROJECTModel.FK_Information_Depatment_Developers" ManuallyRouted="false" />
+        <AssociationConnector Association="STU_PROJECTModel.FK_Tehnical_Depatment_Developers1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
